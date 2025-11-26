@@ -1,0 +1,7 @@
+# 🔐 Security: Check for secrets before committing
+echo "🔍 Running gitleaks to check for secrets..."
+gitleaks protect --staged --verbose
+
+# Run pre-commit hooks
+echo "🔧 Running pre-commit hooks..."
+pre-commit run --all-files

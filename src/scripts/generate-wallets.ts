@@ -1,11 +1,11 @@
 /**
  * Mass Wallet Generator
- * 
+ *
  * Generates multiple wallets for noise workers and probe workers.
  * Outputs wallet addresses and private keys to a JSON file.
- * 
+ *
  * SECURITY: The output file is gitignored. Never commit wallet keys.
- * 
+ *
  * Usage:
  *   npx tsx src/scripts/generate-wallets.ts --noise 30 --probe 10
  */
@@ -195,11 +195,11 @@ function saveInventory(inventory: WalletInventory): void {
 
 function generateFundingScript(inventory: WalletInventory): void {
   const addresses = inventory.wallets.map(w => w.address);
-  
+
   console.log('\n' + '='.repeat(60));
   console.log('📋 FUNDING ADDRESSES (copy for multi-send):');
   console.log('='.repeat(60));
-  
+
   // Group by role
   const byRole = {
     deployer: inventory.wallets.filter(w => w.role === 'deployer'),
@@ -229,7 +229,7 @@ function generateFundingScript(inventory: WalletInventory): void {
     ...byRole.probe.map(w => `${w.address},probe,0.1`),
     ...byRole.noise.map(w => `${w.address},noise,0.05`),
   ].join('\n');
-  
+
   fs.writeFileSync(csvPath, csvContent);
   console.log(`\n📊 CSV for funding: ${csvPath}`);
 
@@ -240,7 +240,7 @@ function generateFundingScript(inventory: WalletInventory): void {
 
 async function main() {
   const { noise, probe, useMnemonic } = parseArgs();
-  
+
   console.log('🔬 Monad Microstructure Research - Wallet Generator');
   console.log(`\n   Noise Wallets: ${noise}`);
   console.log(`   Probe Wallets: ${probe}`);

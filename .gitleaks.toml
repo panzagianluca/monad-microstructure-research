@@ -1,0 +1,33 @@
+# Gitleaks Configuration
+# Custom rules for Monad Microstructure Research
+
+title = "Monad Research Gitleaks Config"
+
+[extend]
+# Use the default gitleaks config as base
+useDefault = true
+
+# Allowlist - files and patterns that are OK
+[allowlist]
+description = "Allowlisted files and patterns"
+paths = [
+    '''^\.env\.example$''',
+    '''\.md$''',
+    '''package-lock\.json$''',
+    '''\.gitleaks\.toml$''',
+    # Source code files that mention secrets in comments/strings (not actual secrets)
+    '''^src/scripts/generate-wallets\.ts$''',
+]
+
+# Patterns that look like secrets but aren't
+regexes = [
+    '''0x0{64}''',  # All zeros placeholder
+    '''DEPLOYER_PRIVATE_KEY=0x0+''',  # Placeholder in .env.example
+    '''Generated Mnemonic''',  # Log message, not actual mnemonic
+    '''HD Wallet \(Mnemonic\)''',  # UI text
+    '''useMnemonic''',  # Variable name
+]
+
+commits = [
+    # Initial commit with scaffolding
+]

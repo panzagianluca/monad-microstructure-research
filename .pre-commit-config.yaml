@@ -1,0 +1,41 @@
+# Pre-commit hooks for preventing secret leaks
+# See https://pre-commit.com for more information
+
+repos:
+  # Gitleaks - detect hardcoded secrets
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.29.1
+    hooks:
+      - id: gitleaks
+
+  # Additional security checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      # Prevent large files from being committed
+      - id: check-added-large-files
+        args: ['--maxkb=500']
+      # Check for files that would conflict on case-insensitive filesystems
+      - id: check-case-conflict
+      # Check for merge conflict strings
+      - id: check-merge-conflict
+      # Detect private keys
+      - id: detect-private-key
+      # Check JSON syntax
+      - id: check-json
+      # Check YAML syntax
+      - id: check-yaml
+      # Ensure files end with newline
+      - id: end-of-file-fixer
+      # Trim trailing whitespace
+      - id: trailing-whitespace
+
+  # TypeScript/JavaScript linting
+  - repo: local
+    hooks:
+      - id: typecheck
+        name: TypeScript Type Check
+        entry: npx tsc --noEmit
+        language: system
+        types: [ts]
+        pass_filenames: false

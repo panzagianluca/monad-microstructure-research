@@ -1,8 +1,8 @@
 # Monad Contested State Microstructure Study
 ## Pre-Registration Document (Phase 0)
 
-**Author:** Gianluca Panza  
-**Date:** 2025-11-25  
+**Author:** Gianluca Panza
+**Date:** 2025-11-25
 **Status:** LOCKED
 
 ---
@@ -238,7 +238,7 @@ By proceeding past Phase 0, I commit to:
 - [ ] Documenting all deviations from this protocol
 - [ ] Publishing methodology with results
 
-**Signed:** ____________________  
+**Signed:** ____________________
 **Date:** ____________________
 
 ---

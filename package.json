@@ -4,9 +4,21 @@
   "description": "Contested state microstructure research on Monad",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"No tests yet\" && exit 0",
     "lint": "eslint src/",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky",
+    "generate-wallets": "tsx src/scripts/generate-wallets.ts",
+    "sanity-check": "tsx src/scripts/sanity-check.ts",
+    "security-check": "gitleaks detect --verbose"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "gitleaks detect --verbose --no-git"
+    ],
+    "*.json": [
+      "gitleaks detect --verbose --no-git"
+    ]
   },
   "keywords": [
     "monad",
@@ -18,15 +30,17 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "viem": "^2.21.0",
+    "dotenv": "^16.4.5",
     "ethers": "^6.13.0",
-    "dotenv": "^16.4.5"
+    "viem": "^2.21.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
-    "typescript": "^5.6.0",
+    "eslint": "^9.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "tsx": "^4.19.0",
-    "eslint": "^9.0.0"
+    "typescript": "^5.6.0"
   },
   "engines": {
     "node": ">=20.0.0"

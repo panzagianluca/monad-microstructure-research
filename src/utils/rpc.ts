@@ -1,13 +1,13 @@
 /**
  * RPC Client Utilities
- * 
+ *
  * Handles all communication with Monad RPCs with proper rate limiting
  */
 
-import { 
-  createPublicClient, 
-  createWalletClient, 
-  http, 
+import {
+  createPublicClient,
+  createWalletClient,
+  http,
   webSocket,
   type PublicClient,
   type WalletClient,
@@ -97,13 +97,13 @@ export class RateLimiter {
 
   async acquire(): Promise<void> {
     this.refill();
-    
+
     if (this.tokens < 1) {
       const waitTime = (1 / this.refillRate) * 1000;
       await sleep(waitTime);
       this.refill();
     }
-    
+
     this.tokens -= 1;
   }
 
@@ -128,31 +128,29 @@ export async function getLogsInChunks(
     address?: `0x${string}`;
     fromBlock: bigint;
     toBlock: bigint;
-    topics?: (`0x${string}` | null)[];
   },
   chunkSize: number = RATE_LIMITS.logBlockChunkSize
 ): Promise<any[]> {
   const allLogs: any[] = [];
   let currentFrom = params.fromBlock;
-  
+
   while (currentFrom <= params.toBlock) {
-    const currentTo = currentFrom + BigInt(chunkSize - 1) > params.toBlock 
-      ? params.toBlock 
+    const currentTo = currentFrom + BigInt(chunkSize - 1) > params.toBlock
+      ? params.toBlock
       : currentFrom + BigInt(chunkSize - 1);
-    
+
     const logs = await client.getLogs({
       address: params.address,
       fromBlock: currentFrom,
       toBlock: currentTo,
-      topics: params.topics,
     });
-    
+
     allLogs.push(...logs);
     currentFrom = currentTo + 1n;
-    
+
     // Respect rate limits
     await sleep(RATE_LIMITS.batchDelayMs);
   }
-  
+
   return allLogs;
 }

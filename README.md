@@ -148,7 +148,7 @@ monad-microstructure-research/
 
 ### Prerequisites
 
-- **Node.js** 20+ 
+- **Node.js** 20+
 - **Python** 3.10+ (for notebooks)
 - Funded wallet(s) on Monad
 

@@ -11,6 +11,7 @@ dist/
 *.key
 *.pem
 wallets.json
+funding-addresses.csv
 private_keys.txt
 
 # Logs and data (large files)
