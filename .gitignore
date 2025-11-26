@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+dist/
+
+# Environment files (NEVER COMMIT)
+.env
+.env.local
+.env.*.local
+
+# Wallet files (NEVER COMMIT)
+*.key
+*.pem
+wallets.json
+private_keys.txt
+
+# Logs and data (large files)
+logs/
+data/raw/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+*.egg-info/
+.ipynb_checkpoints/
+
+# Jupyter
+*.ipynb_checkpoints/
+
+# Ignore vscode AI rules
+.github/instructions/codacy.instructions.md
